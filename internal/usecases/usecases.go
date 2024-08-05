@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/time"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/repository"
 )
@@ -24,8 +25,19 @@ type FlatCreateRequest struct {
 	Price    uint32
 	RoomsNum uint32
 }
-
 type FlatCreateResponse struct {
+	FlatID   uint32
+	HouseID  uint32
+	Price    uint32
+	RoomsNum uint32
+	Status   string
+}
+
+type FlatUpdateRequest struct {
+	FlatID uint32
+	Status flat.Status
+}
+type FlatUpdateResponse struct {
 	FlatID   uint32
 	HouseID  uint32
 	Price    uint32
@@ -36,6 +48,7 @@ type FlatCreateResponse struct {
 type Usecase interface {
 	HouseCreate(HouseCreateRequest) (HouseCreateResponse, error)
 	FlatCreate(FlatCreateRequest) (FlatCreateResponse, error)
+	FlatUpdate(FlatUpdateRequest) (FlatUpdateResponse, error)
 }
 
 type usecase struct {
