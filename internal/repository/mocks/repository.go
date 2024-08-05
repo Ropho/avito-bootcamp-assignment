@@ -70,6 +70,21 @@ func (mr *MockRepositoryMockRecorder) FlatUpdate(flatID, flatStatus any) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatUpdate", reflect.TypeOf((*MockRepository)(nil).FlatUpdate), flatID, flatStatus)
 }
 
+// GetHouseFlats mocks base method.
+func (m *MockRepository) GetHouseFlats(houseID uint32, onlyApproved bool) ([]flat.Model, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetHouseFlats", houseID, onlyApproved)
+	ret0, _ := ret[0].([]flat.Model)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetHouseFlats indicates an expected call of GetHouseFlats.
+func (mr *MockRepositoryMockRecorder) GetHouseFlats(houseID, onlyApproved any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHouseFlats", reflect.TypeOf((*MockRepository)(nil).GetHouseFlats), houseID, onlyApproved)
+}
+
 // HouseCreate mocks base method.
 func (m *MockRepository) HouseCreate(arg0 house.Model) (uint32, error) {
 	m.ctrl.T.Helper()

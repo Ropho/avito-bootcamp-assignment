@@ -45,6 +45,21 @@ type FlatUpdateResponse struct {
 	Status   string
 }
 
+type GetHouseFlatsRequest struct {
+	HouseID      uint32
+	OnlyApproved bool
+}
+
+type GetHouseFlatsResponse struct {
+	Flats []struct {
+		FlatID  uint32
+		HouseID uint32
+		Price   uint32
+		Rooms   uint32
+		Status  string
+	}
+}
+
 type Usecase interface {
 	HouseCreate(HouseCreateRequest) (HouseCreateResponse, error)
 	FlatCreate(FlatCreateRequest) (FlatCreateResponse, error)
