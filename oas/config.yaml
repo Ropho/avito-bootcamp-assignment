@@ -1,0 +1,8 @@
+package: api
+generate:
+  models: true
+  chi-server: true
+  client: true
+output: api/api.gen.go
+output-options:
+  client-type-name: ServiceClient

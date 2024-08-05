@@ -1,0 +1,5 @@
+*.pb.go -diff
+*.pb.gw.go -diff
+*.pb.goclay.go -diff
+*.swagger.json -diff
+*swagger.go -diff
