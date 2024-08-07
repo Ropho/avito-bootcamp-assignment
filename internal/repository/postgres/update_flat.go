@@ -50,7 +50,7 @@ func (r *pgRepo) FlatUpdate(ctx context.Context, flatID uint32, flatStatus strin
 var updateFlatQuery = `
 UPDATE flats
 SET status = $1
-WHERE flatID = $2
+WHERE flat_id = $2
 `
 
 var getFlatByID = `

@@ -79,11 +79,30 @@ func TestGetHouseFlats(t *testing.T) {
 				rows := sqlmock.NewRows([]string{"flat_id", "price", "rooms_number", "status"}).
 					AddRows(expectedValues...)
 
-				mock.ExpectQuery(`SELECT FROM flats`).WithArgs(
+				mock.ExpectQuery(`SELECT flat_id, price, rooms_number, status FROM flats`).WithArgs(
 					args.houseID,
 				).WillReturnRows(rows)
 			},
 			wantFlats: flatsResponse1,
+			wantErr:   nil,
+		},
+		{
+			name: "Positive #2: non admin request",
+			args: args{
+				houseID:      1,
+				onlyApproved: true,
+			},
+			mockBehaviour: func(args args, wantFlats []flat.Model) {
+
+				rows := sqlmock.NewRows([]string{"flat_id", "price", "rooms_number", "status"}).
+					AddRow(flatsResponse1[0].FlatID, flatsResponse1[0].Price, flatsResponse1[0].RoomsNum, flatsResponse1[0].Status.String())
+
+				mock.ExpectQuery(`SELECT flat_id, price, rooms_number, status FROM flats`).WithArgs(
+					args.houseID,
+					flat.Approved.String(),
+				).WillReturnRows(rows)
+			},
+			wantFlats: []flat.Model{flatsResponse1[0]},
 			wantErr:   nil,
 		},
 	}

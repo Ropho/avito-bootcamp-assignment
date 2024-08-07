@@ -67,8 +67,8 @@ func TestCreateFlat(t *testing.T) {
 
 			gotID, err := repo.CreateFlat(context.Background(), test.args.flat)
 
-			require.Equal(t, test.wantID, gotID, "ids not equal")
 			require.ErrorIs(t, err, test.wantErr, "errors not equal ", err, " ", test.wantErr)
+			require.Equal(t, test.wantID, gotID, "ids not equal")
 		})
 	}
 }

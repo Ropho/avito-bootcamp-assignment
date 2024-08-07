@@ -71,8 +71,8 @@ func TestCreateHouse(t *testing.T) {
 
 			gotID, err := repo.CreateHouse(context.Background(), test.args.house)
 
-			require.Equal(t, test.wantID, gotID, "ids not equal")
 			require.ErrorIs(t, err, test.wantErr, "errors not equal ", err, " ", test.wantErr)
+			require.Equal(t, test.wantID, gotID, "ids not equal")
 		})
 	}
 }
