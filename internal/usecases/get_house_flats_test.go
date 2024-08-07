@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -108,7 +109,7 @@ func Test_usecase_GetHouseFlats(t *testing.T) {
 		{
 			name: "Postive #1: regular user",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().GetHouseFlats(PostitveGetHouseFlatsRequest1.HouseID,
+				f.repo.EXPECT().GetHouseFlats(context.Background(), PostitveGetHouseFlatsRequest1.HouseID,
 					PostitveGetHouseFlatsRequest1.OnlyApproved).Return(PostitveGetHouseModelFlatsResponse1, nil)
 			},
 			args: args{
@@ -120,7 +121,7 @@ func Test_usecase_GetHouseFlats(t *testing.T) {
 		{
 			name: "Postive #2: moderator",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().GetHouseFlats(PostitveGetHouseFlatsRequest2.HouseID,
+				f.repo.EXPECT().GetHouseFlats(context.Background(), PostitveGetHouseFlatsRequest2.HouseID,
 					PostitveGetHouseFlatsRequest2.OnlyApproved).Return(PostitveGetHouseModelFlatsResponse2, nil)
 			},
 			args: args{
@@ -146,7 +147,7 @@ func Test_usecase_GetHouseFlats(t *testing.T) {
 				time: model_time.NewTimeImpl(currentTime),
 			}
 
-			got, err := u.GetHouseFlats(tt.args.req)
+			got, err := u.GetHouseFlats(context.Background(), tt.args.req)
 			assert.ErrorIs(t, err, tt.wantErr, "errors not equal")
 
 			assert.ElementsMatch(t, tt.want.Flats, got.Flats, "not equal response")

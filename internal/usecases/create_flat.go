@@ -1,12 +1,13 @@
 package usecases
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 )
 
-func (u *usecase) FlatCreate(req FlatCreateRequest) (FlatCreateResponse, error) {
+func (u *usecase) FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error) {
 	var err error
 
 	flat := flat.New(flat.NewParams{
@@ -15,7 +16,7 @@ func (u *usecase) FlatCreate(req FlatCreateRequest) (FlatCreateResponse, error) 
 		RoomsNum: req.RoomsNum,
 	})
 
-	flatID, err := u.repo.FlatCreate(flat)
+	flatID, err := u.repo.FlatCreate(ctx, flat)
 	if err != nil {
 		return FlatCreateResponse{}, fmt.Errorf("failed to create flat in repository: [%w]", err)
 	}

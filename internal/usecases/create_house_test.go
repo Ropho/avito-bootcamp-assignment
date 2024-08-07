@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"context"
 	"testing"
 	"time"
 
@@ -43,7 +44,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 		{
 			name: "Postive #1",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().HouseCreate(house.Model{
+				f.repo.EXPECT().HouseCreate(context.Background(), house.Model{
 					HouseID:   0,
 					Address:   PostitveHouseRequest1.Address,
 					Year:      PostitveHouseRequest1.Year,
@@ -70,7 +71,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 		{
 			name: "Postive #2: no developer",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().HouseCreate(house.Model{
+				f.repo.EXPECT().HouseCreate(context.Background(), house.Model{
 					HouseID:   0,
 					Address:   PostitveHouseRequest2.Address,
 					Year:      PostitveHouseRequest2.Year,
@@ -111,7 +112,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 				time: model_time.NewTimeImpl(currentTime),
 			}
 
-			got, err := u.HouseCreate(tt.args.req)
+			got, err := u.HouseCreate(context.Background(), tt.args.req)
 			assert.ErrorIs(t, err, tt.wantErr, "errors not equal")
 
 			assert.Equal(t, tt.want, got, "not equal response")

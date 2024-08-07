@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -42,7 +43,7 @@ func Test_usecase_FlatUpdate(t *testing.T) {
 		{
 			name: "Postive #1",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().FlatUpdate(PosititveUpdateFlatRequest1.FlatID, PosititveUpdateFlatRequest1.Status.String()).Return(
+				f.repo.EXPECT().FlatUpdate(context.Background(), PosititveUpdateFlatRequest1.FlatID, PosititveUpdateFlatRequest1.Status.String()).Return(
 					PositiveUpdateFlat1, nil,
 				)
 			},
@@ -75,7 +76,9 @@ func Test_usecase_FlatUpdate(t *testing.T) {
 				time: model_time.NewTimeImpl(currentTime),
 			}
 
-			got, err := u.FlatUpdate(tt.args.req)
+			got, err := u.FlatUpdate(
+				context.Background(),
+				tt.args.req)
 			assert.ErrorIs(t, err, tt.wantErr, "errors not equal")
 
 			assert.Equal(t, tt.want, got, "not equal response")

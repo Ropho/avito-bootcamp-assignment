@@ -10,6 +10,7 @@
 package mock_repository
 
 import (
+	context "context"
 	reflect "reflect"
 
 	flat "github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
@@ -41,61 +42,61 @@ func (m *MockRepository) EXPECT() *MockRepositoryMockRecorder {
 }
 
 // FlatCreate mocks base method.
-func (m *MockRepository) FlatCreate(arg0 flat.Model) (uint32, error) {
+func (m *MockRepository) FlatCreate(ctx context.Context, flat flat.Model) (uint32, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "FlatCreate", arg0)
+	ret := m.ctrl.Call(m, "FlatCreate", ctx, flat)
 	ret0, _ := ret[0].(uint32)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // FlatCreate indicates an expected call of FlatCreate.
-func (mr *MockRepositoryMockRecorder) FlatCreate(arg0 any) *gomock.Call {
+func (mr *MockRepositoryMockRecorder) FlatCreate(ctx, flat any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatCreate", reflect.TypeOf((*MockRepository)(nil).FlatCreate), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatCreate", reflect.TypeOf((*MockRepository)(nil).FlatCreate), ctx, flat)
 }
 
 // FlatUpdate mocks base method.
-func (m *MockRepository) FlatUpdate(flatID uint32, flatStatus string) (flat.Model, error) {
+func (m *MockRepository) FlatUpdate(ctx context.Context, flatID uint32, flatStatus string) (flat.Model, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "FlatUpdate", flatID, flatStatus)
+	ret := m.ctrl.Call(m, "FlatUpdate", ctx, flatID, flatStatus)
 	ret0, _ := ret[0].(flat.Model)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // FlatUpdate indicates an expected call of FlatUpdate.
-func (mr *MockRepositoryMockRecorder) FlatUpdate(flatID, flatStatus any) *gomock.Call {
+func (mr *MockRepositoryMockRecorder) FlatUpdate(ctx, flatID, flatStatus any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatUpdate", reflect.TypeOf((*MockRepository)(nil).FlatUpdate), flatID, flatStatus)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatUpdate", reflect.TypeOf((*MockRepository)(nil).FlatUpdate), ctx, flatID, flatStatus)
 }
 
 // GetHouseFlats mocks base method.
-func (m *MockRepository) GetHouseFlats(houseID uint32, onlyApproved bool) ([]flat.Model, error) {
+func (m *MockRepository) GetHouseFlats(ctx context.Context, houseID uint32, onlyApproved bool) ([]flat.Model, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetHouseFlats", houseID, onlyApproved)
+	ret := m.ctrl.Call(m, "GetHouseFlats", ctx, houseID, onlyApproved)
 	ret0, _ := ret[0].([]flat.Model)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetHouseFlats indicates an expected call of GetHouseFlats.
-func (mr *MockRepositoryMockRecorder) GetHouseFlats(houseID, onlyApproved any) *gomock.Call {
+func (mr *MockRepositoryMockRecorder) GetHouseFlats(ctx, houseID, onlyApproved any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHouseFlats", reflect.TypeOf((*MockRepository)(nil).GetHouseFlats), houseID, onlyApproved)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHouseFlats", reflect.TypeOf((*MockRepository)(nil).GetHouseFlats), ctx, houseID, onlyApproved)
 }
 
 // HouseCreate mocks base method.
-func (m *MockRepository) HouseCreate(arg0 house.Model) (uint32, error) {
+func (m *MockRepository) HouseCreate(ctx context.Context, house house.Model) (uint32, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "HouseCreate", arg0)
+	ret := m.ctrl.Call(m, "HouseCreate", ctx, house)
 	ret0, _ := ret[0].(uint32)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // HouseCreate indicates an expected call of HouseCreate.
-func (mr *MockRepositoryMockRecorder) HouseCreate(arg0 any) *gomock.Call {
+func (mr *MockRepositoryMockRecorder) HouseCreate(ctx, house any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HouseCreate", reflect.TypeOf((*MockRepository)(nil).HouseCreate), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HouseCreate", reflect.TypeOf((*MockRepository)(nil).HouseCreate), ctx, house)
 }

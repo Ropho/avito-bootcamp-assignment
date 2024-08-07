@@ -1,12 +1,16 @@
 package usecases
 
 import (
+	"context"
 	"fmt"
 )
 
-func (u *usecase) FlatUpdate(req FlatUpdateRequest) (FlatUpdateResponse, error) {
+func (u *usecase) FlatUpdate(ctx context.Context, req FlatUpdateRequest) (FlatUpdateResponse, error) {
 
-	flat, err := u.repo.FlatUpdate(req.FlatID, req.Status.String())
+	flat, err := u.repo.FlatUpdate(
+		ctx,
+		req.FlatID,
+		req.Status.String())
 	if err != nil {
 		return FlatUpdateResponse{}, fmt.Errorf("failed to update flat in repository: [%w]", err)
 	}

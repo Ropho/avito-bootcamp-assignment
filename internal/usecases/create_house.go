@@ -1,12 +1,13 @@
 package usecases
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/house"
 )
 
-func (u *usecase) HouseCreate(req HouseCreateRequest) (HouseCreateResponse, error) {
+func (u *usecase) HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error) {
 	var err error
 
 	house := house.New(house.NewParams{
@@ -16,7 +17,7 @@ func (u *usecase) HouseCreate(req HouseCreateRequest) (HouseCreateResponse, erro
 		Time:      u.time,
 	})
 
-	houseID, err := u.repo.HouseCreate(house)
+	houseID, err := u.repo.HouseCreate(ctx, house)
 	if err != nil {
 		return HouseCreateResponse{}, fmt.Errorf("failed to create house in repository: [%w]", err)
 	}

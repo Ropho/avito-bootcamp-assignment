@@ -191,3 +191,10 @@ ci-lint: ## run linter via pipeline linter image
 
 .PHONY: generate
 generate: bin-deps .generate ## generate code from proto
+
+# Use make generate before linting & testing
+.PHONY: test-integration-ci
+test-integration-ci:
+	sudo docker compose -f ./scripts/test_integration/docker-compose.yaml up --force-recreate --detach;
+	sleep 10 # wait all dependencies start;
+	go test -v ./test_integration/... -tags=integration_repo;

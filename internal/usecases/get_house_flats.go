@@ -1,13 +1,14 @@
 package usecases
 
 import (
+	"context"
 	"fmt"
 )
 
-func (u *usecase) GetHouseFlats(req GetHouseFlatsRequest) (GetHouseFlatsResponse, error) {
+func (u *usecase) GetHouseFlats(ctx context.Context, req GetHouseFlatsRequest) (GetHouseFlatsResponse, error) {
 	var err error
 
-	flats, err := u.repo.GetHouseFlats(req.HouseID, req.OnlyApproved)
+	flats, err := u.repo.GetHouseFlats(ctx, req.HouseID, req.OnlyApproved)
 	if err != nil {
 		return GetHouseFlatsResponse{}, fmt.Errorf("failed to get flats in the house with id %d in repository: [%w]", req.HouseID, err)
 	}

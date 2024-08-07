@@ -1,6 +1,8 @@
 package usecases
 
 import (
+	"context"
+
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/time"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/repository"
@@ -61,9 +63,9 @@ type GetHouseFlatsResponse struct {
 }
 
 type Usecase interface {
-	HouseCreate(HouseCreateRequest) (HouseCreateResponse, error)
-	FlatCreate(FlatCreateRequest) (FlatCreateResponse, error)
-	FlatUpdate(FlatUpdateRequest) (FlatUpdateResponse, error)
+	HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error)
+	FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error)
+	FlatUpdate(ctx context.Context, req FlatUpdateRequest) (FlatUpdateResponse, error)
 }
 
 type usecase struct {

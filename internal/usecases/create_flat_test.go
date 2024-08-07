@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -36,7 +37,7 @@ func Test_usecase_FlatCreate(t *testing.T) {
 		{
 			name: "Postive #1",
 			prepare: func(f *fields) {
-				f.repo.EXPECT().FlatCreate(flat.Model{
+				f.repo.EXPECT().FlatCreate(context.Background(), flat.Model{
 					HouseID:  PosititveFlatRequest1.HouseID,
 					Price:    PosititveFlatRequest1.Price,
 					RoomsNum: PosititveFlatRequest1.RoomsNum,
@@ -74,7 +75,7 @@ func Test_usecase_FlatCreate(t *testing.T) {
 				time: model_time.NewTimeImpl(currentTime),
 			}
 
-			got, err := u.FlatCreate(tt.args.req)
+			got, err := u.FlatCreate(context.Background(), tt.args.req)
 			assert.ErrorIs(t, err, tt.wantErr, "errors not equal")
 
 			assert.Equal(t, tt.want, got, "not equal response")
