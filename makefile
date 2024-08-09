@@ -201,5 +201,5 @@ test-integration-ci:
 	sleep 10
 	./bin/migrate  -path ./migrations -database "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable" up	
 	sudo go test -v ./test_integration/... -tags=integration_repo;
-	./bin/migrate  -path ./migrations -database "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable" down
+	./bin/migrate  -path ./migrations -database "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable" down 1
 	sudo docker compose -f ./test_integration/docker-compose.yaml down
