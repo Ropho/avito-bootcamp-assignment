@@ -9,6 +9,8 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/api"
 	"github.com/Ropho/avito-bootcamp-assignment/config"
 	timeModel "github.com/Ropho/avito-bootcamp-assignment/internal/models/time"
+	"github.com/Ropho/avito-bootcamp-assignment/internal/worker"
+
 	"github.com/Ropho/avito-bootcamp-assignment/internal/repository/postgres"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/router"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/server"
@@ -47,11 +49,21 @@ func App(configPath, configName string) error {
 		return fmt.Errorf("failed to init jwt service: [%w]", err)
 	}
 
+	emailsChan := make(chan []string, 1000)
+
+	emailWorker := worker.NewWEmailorker(worker.NewWorkerParams{
+		EmailsChan: emailsChan,
+	})
+	go func() {
+		logger.Fatal("worker stopped with error: ", emailWorker.Work())
+	}()
+
 	usecases := usecases.NewUsecases(usecases.NewUsecasesParams{
 		Repo:       &repo,
 		Time:       timeModel.NewTimeImpl(time.Now()),
 		JWTService: jwtService,
 		Logger:     logger,
+		EmailChan:  emailsChan,
 	})
 
 	serv := service.NewService(service.NewServiceParams{

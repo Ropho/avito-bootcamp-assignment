@@ -119,6 +119,8 @@ type usecases struct {
 	time       time.Time
 	jwtService jwt.Service
 	logger     logger.Logger
+
+	emailChan chan []string
 }
 
 type NewUsecasesParams struct {
@@ -126,6 +128,7 @@ type NewUsecasesParams struct {
 	Time       time.Time
 	JWTService jwt.Service
 	Logger     logger.Logger
+	EmailChan  chan []string
 }
 
 func NewUsecases(p NewUsecasesParams) usecases {
@@ -134,5 +137,6 @@ func NewUsecases(p NewUsecasesParams) usecases {
 		time:       p.Time,
 		jwtService: p.JWTService,
 		logger:     p.Logger,
+		emailChan:  p.EmailChan,
 	}
 }

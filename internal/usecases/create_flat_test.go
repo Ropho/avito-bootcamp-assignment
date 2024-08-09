@@ -45,6 +45,8 @@ func Test_usecase_FlatCreate(t *testing.T) {
 				}).Return(
 					uint32(1), nil,
 				)
+
+				f.repo.EXPECT().GetEmailsByHouseID(context.Background(), int(PosititveFlatRequest1.HouseID)).Return(nil, nil)
 			},
 			args: args{
 				req: PosititveFlatRequest1,

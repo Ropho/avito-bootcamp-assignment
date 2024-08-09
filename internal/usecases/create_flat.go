@@ -22,12 +22,10 @@ func (u *usecases) FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatC
 	}
 	flat.FlatID = flatID
 
-	go func() {
-		err = u.SendEmailSubscribers(ctx, SendEmailSubscribersRequest{HouseID: int(req.HouseID)})
-		if err != nil {
-			u.logger.Errorf(err, "failed to send notifications email")
-		}
-	}()
+	err = u.SendEmailSubscribers(ctx, SendEmailSubscribersRequest{HouseID: int(req.HouseID)})
+	if err != nil {
+		return FlatCreateResponse{}, fmt.Errorf("failed to send notifications: [%w]", err)
+	}
 
 	return FlatCreateResponse{
 		FlatID:   flat.FlatID,
