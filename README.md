@@ -1,5 +1,5 @@
 # avito-bootcamp-assignment
-![Coverage](https://img.shields.io/badge/Coverage-53.5%25-yellow)
+![Coverage](https://img.shields.io/badge/Coverage-45.8%25-yellow)
 
 [![Audit](https://github.com/Ropho/avito-bootcamp-assignment/actions/workflows/audit.yml/badge.svg?branch=master)](https://github.com/Ropho/avito-bootcamp-assignment/actions/workflows/audit.yml)
 
