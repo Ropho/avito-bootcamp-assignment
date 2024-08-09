@@ -64,6 +64,8 @@ func (s *FlatCreateSuite) TestService_FlatCreateModerator(t provider.T) {
 	client := http.Client{}
 	resp, err = client.Do(req)
 	require.NoError(t, err)
+
+	defer resp.Body.Close()
 	require.Equal(t, resp.StatusCode, http.StatusOK)
 
 	got, err := getFlatFromBody(resp.Body)
@@ -115,6 +117,8 @@ func (s *FlatCreateSuite) TestService_FlatCreateClient(t provider.T) {
 	client := http.Client{}
 	resp, err = client.Do(req)
 	require.NoError(t, err)
+	defer resp.Body.Close()
+
 	require.Equal(t, resp.StatusCode, http.StatusOK)
 
 	got, err := getFlatFromBody(resp.Body)
@@ -141,7 +145,6 @@ func getFlatFromBody(body io.ReadCloser) (createFlatResponse, error) {
 	if err != nil {
 		return createFlatResponse{}, fmt.Errorf("failed to read body: [%w]", err)
 	}
-	defer body.Close()
 
 	err = json.Unmarshal(bytes, &resp)
 	if err != nil {
