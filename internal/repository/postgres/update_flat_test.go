@@ -19,7 +19,7 @@ var testFlat1 = flat.Model{
 	Status:   flat.OnModeration,
 }
 
-func TestUpdateFlat(t *testing.T) {
+func TestFlatUpdate(t *testing.T) {
 
 	db, mock, err := sqlmock.New()
 	assert.NoError(t, err, "failed to init sql db mock: ", err)

@@ -3,9 +3,12 @@ package usecases
 import (
 	"context"
 
+	"github.com/google/uuid"
+
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/time"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/repository"
+	"github.com/Ropho/avito-bootcamp-assignment/pkg/jwt"
 )
 
 type HouseCreateRequest struct {
@@ -62,25 +65,56 @@ type GetHouseFlatsResponse struct {
 	}
 }
 
-type Usecase interface {
+type RegisterUserRequest struct {
+	Email    string
+	Password string
+	UserType string
+}
+type RegisterUserResponse struct {
+	UUID uuid.UUID
+}
+
+type LoginUserRequest struct {
+	UUID     uuid.UUID
+	Password string
+}
+type LoginUserResponse struct {
+	Token string
+}
+
+type GetDummyLoginRequest struct {
+	UserType string
+}
+type GetDummyLoginResponse struct {
+	Token string
+}
+
+type Usecases interface {
 	HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error)
 	FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error)
 	FlatUpdate(ctx context.Context, req FlatUpdateRequest) (FlatUpdateResponse, error)
+	GetHouseFlats(ctx context.Context, req GetHouseFlatsRequest) (GetHouseFlatsResponse, error)
+	RegisterUser(ctx context.Context, req RegisterUserRequest) (RegisterUserResponse, error)
+	LoginUser(ctx context.Context, req LoginUserRequest) (LoginUserResponse, error)
+	GetDummyLogin(ctx context.Context, req GetDummyLoginRequest) (GetDummyLoginResponse, error)
 }
 
-type usecase struct {
-	repo repository.Repository
-	time time.Time
+type usecases struct {
+	repo       repository.Repository
+	time       time.Time
+	jwtService jwt.Service
 }
 
-type NewUsecaseParams struct {
-	Repo repository.Repository
-	Time time.Time
+type NewUsecasesParams struct {
+	Repo       repository.Repository
+	Time       time.Time
+	JWTService jwt.Service
 }
 
-func NewUsecase(p NewUsecaseParams) usecase {
-	return usecase{
-		repo: p.Repo,
-		time: p.Time,
+func NewUsecases(p NewUsecasesParams) usecases {
+	return usecases{
+		repo:       p.Repo,
+		time:       p.Time,
+		jwtService: p.JWTService,
 	}
 }

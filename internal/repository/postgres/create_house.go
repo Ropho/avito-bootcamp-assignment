@@ -7,7 +7,7 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/house"
 )
 
-func (r *pgRepo) CreateHouse(ctx context.Context, house house.Model) (uint32, error) {
+func (r *pgRepo) HouseCreate(ctx context.Context, house house.Model) (uint32, error) {
 	var err error
 	var houseID int64
 

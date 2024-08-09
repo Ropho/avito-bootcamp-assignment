@@ -28,3 +28,4 @@ go.work.sum
 /log
 *.log
 /vendor*
+test_integration/docker/*

@@ -15,6 +15,8 @@ import (
 
 	flat "github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 	house "github.com/Ropho/avito-bootcamp-assignment/internal/models/house"
+	user "github.com/Ropho/avito-bootcamp-assignment/internal/models/user"
+	uuid "github.com/google/uuid"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -86,6 +88,21 @@ func (mr *MockRepositoryMockRecorder) GetHouseFlats(ctx, houseID, onlyApproved a
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetHouseFlats", reflect.TypeOf((*MockRepository)(nil).GetHouseFlats), ctx, houseID, onlyApproved)
 }
 
+// GetUserByID mocks base method.
+func (m *MockRepository) GetUserByID(ctx context.Context, uuid uuid.UUID) (user.Model, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserByID", ctx, uuid)
+	ret0, _ := ret[0].(user.Model)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserByID indicates an expected call of GetUserByID.
+func (mr *MockRepositoryMockRecorder) GetUserByID(ctx, uuid any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByID", reflect.TypeOf((*MockRepository)(nil).GetUserByID), ctx, uuid)
+}
+
 // HouseCreate mocks base method.
 func (m *MockRepository) HouseCreate(ctx context.Context, house house.Model) (uint32, error) {
 	m.ctrl.T.Helper()
@@ -99,4 +116,18 @@ func (m *MockRepository) HouseCreate(ctx context.Context, house house.Model) (ui
 func (mr *MockRepositoryMockRecorder) HouseCreate(ctx, house any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HouseCreate", reflect.TypeOf((*MockRepository)(nil).HouseCreate), ctx, house)
+}
+
+// RegisterUser mocks base method.
+func (m *MockRepository) RegisterUser(ctx context.Context, user user.Model) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterUser", ctx, user)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RegisterUser indicates an expected call of RegisterUser.
+func (mr *MockRepositoryMockRecorder) RegisterUser(ctx, user any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUser", reflect.TypeOf((*MockRepository)(nil).RegisterUser), ctx, user)
 }

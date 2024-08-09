@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (u *usecase) GetHouseFlats(ctx context.Context, req GetHouseFlatsRequest) (GetHouseFlatsResponse, error) {
+func (u *usecases) GetHouseFlats(ctx context.Context, req GetHouseFlatsRequest) (GetHouseFlatsResponse, error) {
 	var err error
 
 	flats, err := u.repo.GetHouseFlats(ctx, req.HouseID, req.OnlyApproved)

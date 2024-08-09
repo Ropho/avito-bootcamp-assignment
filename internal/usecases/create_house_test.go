@@ -107,7 +107,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 			}
 			tt.prepare(f)
 
-			u := &usecase{
+			u := &usecases{
 				repo: f.repo,
 				time: model_time.NewTimeImpl(currentTime),
 			}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (u *usecase) FlatUpdate(ctx context.Context, req FlatUpdateRequest) (FlatUpdateResponse, error) {
+func (u *usecases) FlatUpdate(ctx context.Context, req FlatUpdateRequest) (FlatUpdateResponse, error) {
 
 	flat, err := u.repo.FlatUpdate(
 		ctx,

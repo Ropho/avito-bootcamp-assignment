@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCreateHouse(t *testing.T) {
+func TestHouseCreate(t *testing.T) {
 
 	db, mock, err := sqlmock.New()
 	assert.NoError(t, err, "failed to init sql db mock: ", err)
@@ -69,7 +69,7 @@ func TestCreateHouse(t *testing.T) {
 			t.Helper()
 			test.mockBehaviour(test.args, test.wantID)
 
-			gotID, err := repo.CreateHouse(context.Background(), test.args.house)
+			gotID, err := repo.HouseCreate(context.Background(), test.args.house)
 
 			require.ErrorIs(t, err, test.wantErr, "errors not equal ", err, " ", test.wantErr)
 			require.Equal(t, test.wantID, gotID, "ids not equal")

@@ -1,0 +1,10 @@
+service:
+  port: 8080
+
+  logger:
+    log_level: debug
+    dir: "log"
+    file: "log.log"
+
+  postgres:
+    url: "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable"

@@ -7,7 +7,7 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 )
 
-func (r *pgRepo) CreateFlat(ctx context.Context, flat flat.Model) (uint32, error) {
+func (r *pgRepo) FlatCreate(ctx context.Context, flat flat.Model) (uint32, error) {
 	var err error
 	var flatID int64
 

@@ -7,7 +7,7 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/house"
 )
 
-func (u *usecase) HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error) {
+func (u *usecases) HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error) {
 	var err error
 
 	house := house.New(house.NewParams{

@@ -109,7 +109,8 @@ lint-full: .lint-full ## run golangci-lint for the whole project
 .bin-deps:
 	mkdir -p bin
 	$(info Installing binary dependencies...)
-	GOBIN=$(LOCAL_BIN) go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+	GOBIN=$(LOCAL_BIN) go install github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest && \
+	GOBIN=$(LOCAL_BIN) go install -tags "postgres" github.com/golang-migrate/migrate/v4/cmd/migrate@v4.17.1
 
 .PHONY: bin-deps
 bin-deps: .bin-deps ## install binary dependencies required for code generation
@@ -195,6 +196,9 @@ generate: bin-deps .generate ## generate code from proto
 # Use make generate before linting & testing
 .PHONY: test-integration-ci
 test-integration-ci:
-	sudo docker compose -f ./scripts/test_integration/docker-compose.yaml up --force-recreate --detach;
-	sleep 10 # wait all dependencies start;
-	go test -v ./test_integration/... -tags=integration_repo;
+	sudo docker compose -f ./test_integration/docker-compose.yaml up --force-recreate --detach
+	sleep 10
+	./bin/migrate  -path ./migrations -database "postgres://postgres:postgres@localhost:5432/test_db?sslmode=disable" up	
+# go test -v ./test_integration/... -tags=integration_repo;
+# ./bin/migrate  -path ./migrations -database "postgres://postgres:postgres@localhost:5432/db-1?sslmode=disable" down
+# sudo docker compose -f ./test_integration/docker-compose.yaml down

@@ -7,7 +7,7 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 )
 
-func (u *usecase) FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error) {
+func (u *usecases) FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error) {
 	var err error
 
 	flat := flat.New(flat.NewParams{
