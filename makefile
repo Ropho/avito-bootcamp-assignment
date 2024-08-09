@@ -137,7 +137,8 @@ update-deps: .update-deps ## update dependencies
 .PHONY: .test
 .test:
 	$(info Running tests...)
-	go test ./...
+	go test -v -tags=unit ./... -covermode=count -coverprofile=coverage.out
+	go tool cover -func=coverage.out -o=coverage.out
 
 .PHONY: test
 test: .test ## run unit tests

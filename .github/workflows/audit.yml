@@ -45,5 +45,13 @@ jobs:
     - name: Run generate
       run: make generate
 
-    - name: Run tests
+    - name: Run unit tests
+      run: make test
+
+    - name: Go Coverage Badge  # Pass the `coverage.out` output to this action
+      uses: tj-actions/coverage-badge-go@v2
+      with:
+        filename: coverage.out
+        
+    - name: Run integration tests
       run: make test-integration-ci
