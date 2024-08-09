@@ -38,6 +38,15 @@ CREATE TABLE IF NOT EXISTS flats (
     FOREIGN KEY (house_id) REFERENCES houses (house_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS subscriptions (
+    user_id         uuid     NOT NULL,
+    house_id        integer  NOT NULL,
+    email           text     NOT NULL,
+    PRIMARY KEY (user_id, house_id),
+    FOREIGN KEY (user_id)   REFERENCES users  ("uuid")   ON DELETE CASCADE,
+    FOREIGN KEY (house_id)  REFERENCES houses (house_id) ON DELETE CASCADE
+);
+
 -- Тестовые данные для интеграционных тестов
 
 INSERT INTO users ("uuid", email, encr_pass, salt, user_type) VALUES 

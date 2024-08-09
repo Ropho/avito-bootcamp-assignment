@@ -51,6 +51,7 @@ func App(configPath, configName string) error {
 		Repo:       &repo,
 		Time:       timeModel.NewTimeImpl(time.Now()),
 		JWTService: jwtService,
+		Logger:     logger,
 	})
 
 	serv := service.NewService(service.NewServiceParams{

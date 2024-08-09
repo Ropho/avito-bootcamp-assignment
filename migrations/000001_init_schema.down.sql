@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS subscriptions;
 DROP TABLE IF EXISTS flats;
 DROP TABLE IF EXISTS houses;
 

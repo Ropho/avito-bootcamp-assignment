@@ -9,6 +9,7 @@ import (
 	"github.com/Ropho/avito-bootcamp-assignment/internal/models/time"
 	"github.com/Ropho/avito-bootcamp-assignment/internal/repository"
 	"github.com/Ropho/avito-bootcamp-assignment/pkg/jwt"
+	"github.com/Ropho/avito-bootcamp-assignment/pkg/logger"
 )
 
 type HouseCreateRequest struct {
@@ -23,6 +24,14 @@ type HouseCreateResponse struct {
 	Developer string
 	CreatedAt string
 	UpdatedAt string
+}
+
+type HouseSubscribeRequest struct {
+	Email   string
+	UserID  uuid.UUID
+	HouseID int
+}
+type HouseSubscribeResponse struct {
 }
 
 type FlatCreateRequest struct {
@@ -89,6 +98,10 @@ type GetDummyLoginResponse struct {
 	Token string
 }
 
+type SendEmailSubscribersRequest struct {
+	HouseID int
+}
+
 type Usecases interface {
 	HouseCreate(ctx context.Context, req HouseCreateRequest) (HouseCreateResponse, error)
 	FlatCreate(ctx context.Context, req FlatCreateRequest) (FlatCreateResponse, error)
@@ -97,18 +110,22 @@ type Usecases interface {
 	RegisterUser(ctx context.Context, req RegisterUserRequest) (RegisterUserResponse, error)
 	LoginUser(ctx context.Context, req LoginUserRequest) (LoginUserResponse, error)
 	GetDummyLogin(ctx context.Context, req GetDummyLoginRequest) (GetDummyLoginResponse, error)
+	HouseSubscribe(ctx context.Context, req HouseSubscribeRequest) (HouseSubscribeResponse, error)
+	SendEmailSubscribers(ctx context.Context, req SendEmailSubscribersRequest) error
 }
 
 type usecases struct {
 	repo       repository.Repository
 	time       time.Time
 	jwtService jwt.Service
+	logger     logger.Logger
 }
 
 type NewUsecasesParams struct {
 	Repo       repository.Repository
 	Time       time.Time
 	JWTService jwt.Service
+	Logger     logger.Logger
 }
 
 func NewUsecases(p NewUsecasesParams) usecases {
@@ -116,5 +133,6 @@ func NewUsecases(p NewUsecasesParams) usecases {
 		repo:       p.Repo,
 		time:       p.Time,
 		jwtService: p.JWTService,
+		logger:     p.Logger,
 	}
 }

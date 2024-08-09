@@ -15,6 +15,7 @@ import (
 
 	flat "github.com/Ropho/avito-bootcamp-assignment/internal/models/flat"
 	house "github.com/Ropho/avito-bootcamp-assignment/internal/models/house"
+	subscription "github.com/Ropho/avito-bootcamp-assignment/internal/models/subscription"
 	user "github.com/Ropho/avito-bootcamp-assignment/internal/models/user"
 	uuid "github.com/google/uuid"
 	gomock "go.uber.org/mock/gomock"
@@ -71,6 +72,21 @@ func (m *MockRepository) FlatUpdate(ctx context.Context, flatID uint32, flatStat
 func (mr *MockRepositoryMockRecorder) FlatUpdate(ctx, flatID, flatStatus any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FlatUpdate", reflect.TypeOf((*MockRepository)(nil).FlatUpdate), ctx, flatID, flatStatus)
+}
+
+// GetEmailsByHouseID mocks base method.
+func (m *MockRepository) GetEmailsByHouseID(ctx context.Context, houseID int) ([]string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetEmailsByHouseID", ctx, houseID)
+	ret0, _ := ret[0].([]string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetEmailsByHouseID indicates an expected call of GetEmailsByHouseID.
+func (mr *MockRepositoryMockRecorder) GetEmailsByHouseID(ctx, houseID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetEmailsByHouseID", reflect.TypeOf((*MockRepository)(nil).GetEmailsByHouseID), ctx, houseID)
 }
 
 // GetHouseFlats mocks base method.
@@ -130,4 +146,18 @@ func (m *MockRepository) RegisterUser(ctx context.Context, user user.Model) erro
 func (mr *MockRepositoryMockRecorder) RegisterUser(ctx, user any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterUser", reflect.TypeOf((*MockRepository)(nil).RegisterUser), ctx, user)
+}
+
+// SubscriptionCreate mocks base method.
+func (m *MockRepository) SubscriptionCreate(ctx context.Context, sub subscription.Model) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SubscriptionCreate", ctx, sub)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SubscriptionCreate indicates an expected call of SubscriptionCreate.
+func (mr *MockRepositoryMockRecorder) SubscriptionCreate(ctx, sub any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SubscriptionCreate", reflect.TypeOf((*MockRepository)(nil).SubscriptionCreate), ctx, sub)
 }

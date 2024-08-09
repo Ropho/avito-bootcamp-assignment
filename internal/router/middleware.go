@@ -2,7 +2,6 @@ package router
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -14,23 +13,24 @@ import (
 )
 
 const (
-	getHouseFlats = "house/"
-	flatUpdate    = "flat/update"
-	houseCreate   = "house/create"
-	flatCreate    = "flat/create"
+	getHouseFlats  = "house/"
+	flatUpdate     = "flat/update"
+	houseCreate    = "house/create"
+	flatCreate     = "flat/create"
+	houseSubscribe = "/subscribe"
 )
 
 func (m *Manager) Authentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var ctx context.Context
 
-		fmt.Println(r.URL.Path)
-
+		// очень банальная обработка
 		needsAutentication :=
 			strings.Contains(r.URL.Path, flatUpdate) ||
 				strings.Contains(r.URL.Path, houseCreate) ||
 				strings.Contains(r.URL.Path, flatCreate) ||
-				strings.Contains(r.URL.Path, getHouseFlats)
+				strings.Contains(r.URL.Path, getHouseFlats) ||
+				strings.Contains(r.URL.Path, houseSubscribe)
 
 		if needsAutentication {
 
@@ -45,7 +45,8 @@ func (m *Manager) Authentication(next http.Handler) http.Handler {
 				return
 			}
 
-			ctx = context.WithValue(r.Context(), service.UserTypeKey{}, userClaims.UserType)
+			ctx = context.WithValue(r.Context(), service.UserIDKey{}, userClaims.UUID)
+			ctx = context.WithValue(ctx, service.UserTypeKey{}, userClaims.UserType)
 			r = r.WithContext(ctx)
 
 			if strings.Contains(r.URL.Path, flatUpdate) ||
