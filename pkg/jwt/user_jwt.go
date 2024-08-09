@@ -16,7 +16,7 @@ func (j *jwtService) GenerateUserAccessJWT(uuid string, userType string) (string
 
 	return generateJWT(&UserClaims{
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * j.accessTokenExp)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * time.Duration(j.accessTokenExp))),
 		},
 		UUID:     uuid,
 		UserType: userType,

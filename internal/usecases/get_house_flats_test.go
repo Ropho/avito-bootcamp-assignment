@@ -107,7 +107,7 @@ func Test_usecase_GetHouseFlats(t *testing.T) {
 		wantErr error
 	}{
 		{
-			name: "Postive #1: regular user",
+			name: "Positive #1: regular user",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().GetHouseFlats(context.Background(), PostitveGetHouseFlatsRequest1.HouseID,
 					PostitveGetHouseFlatsRequest1.OnlyApproved).Return(PostitveGetHouseModelFlatsResponse1, nil)
@@ -119,7 +119,7 @@ func Test_usecase_GetHouseFlats(t *testing.T) {
 			wantErr: nil,
 		},
 		{
-			name: "Postive #2: moderator",
+			name: "Positive #2: moderator",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().GetHouseFlats(context.Background(), PostitveGetHouseFlatsRequest2.HouseID,
 					PostitveGetHouseFlatsRequest2.OnlyApproved).Return(PostitveGetHouseModelFlatsResponse2, nil)

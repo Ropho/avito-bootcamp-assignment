@@ -35,7 +35,7 @@ func Test_usecase_FlatCreate(t *testing.T) {
 		wantErr error
 	}{
 		{
-			name: "Postive #1",
+			name: "Positive #1",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().FlatCreate(context.Background(), flat.Model{
 					HouseID:  PosititveFlatRequest1.HouseID,

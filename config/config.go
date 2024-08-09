@@ -41,7 +41,7 @@ type LoggerConfig struct {
 // JWTServiceConf describes config for JWT generation service
 type JWTServiceConf struct {
 	AccessJWTSecret string `env:"JWTSECRET" envDefault:"JWTSECRET"`
-	AccessJWTExp    string `env:"JWTEXP" envDefault:"10"`
+	AccessJWTExp    string `env:"JWTEXP"    envDefault:"10"`
 }
 
 func getLoggerCONF(rawLoggerConfig map[string]interface{}) (*LoggerConfig, error) {

@@ -41,7 +41,7 @@ func Test_usecase_FlatUpdate(t *testing.T) {
 		wantErr error
 	}{
 		{
-			name: "Postive #1",
+			name: "Positive #1",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().FlatUpdate(context.Background(), PosititveUpdateFlatRequest1.FlatID, PosititveUpdateFlatRequest1.Status.String()).Return(
 					PositiveUpdateFlat1, nil,

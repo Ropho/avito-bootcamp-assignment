@@ -42,7 +42,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 		wantErr error
 	}{
 		{
-			name: "Postive #1",
+			name: "Positive #1",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().HouseCreate(context.Background(), house.Model{
 					HouseID:   0,
@@ -69,7 +69,7 @@ func Test_usecase_HouseCreate(t *testing.T) {
 			wantErr: nil,
 		},
 		{
-			name: "Postive #2: no developer",
+			name: "Positive #2: no developer",
 			prepare: func(f *fields) {
 				f.repo.EXPECT().HouseCreate(context.Background(), house.Model{
 					HouseID:   0,

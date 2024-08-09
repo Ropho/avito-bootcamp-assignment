@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"time"
 
 	"github.com/Ropho/avito-bootcamp-assignment/config"
 	"github.com/golang-jwt/jwt/v5"
@@ -24,7 +23,7 @@ type Service interface {
 
 type jwtService struct {
 	accessJWTSecret string
-	accessTokenExp  time.Duration
+	accessTokenExp  int
 }
 
 // NewJWTServiceParams describes necessary params to initialize jwtService
@@ -41,7 +40,7 @@ func NewJWTService(p *NewJWTServiceParams) (Service, error) {
 
 	return &jwtService{
 		accessJWTSecret: p.JwtConfig.AccessJWTSecret,
-		accessTokenExp:  time.Duration(exp),
+		accessTokenExp:  exp,
 	}, nil
 }
 

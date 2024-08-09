@@ -2,7 +2,6 @@ package testintegration
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -15,7 +14,6 @@ import (
 
 type FlatCreateSuite struct {
 	suite.Suite
-	ctx context.Context
 }
 
 func (s *FlatCreateSuite) BeforeAll(provider.T) {}
@@ -31,6 +29,7 @@ func (s *FlatCreateSuite) TestService_FlatCreate(t provider.T) {
 	resp, err := http.Get("http://localhost:8080/dummyLogin?user_type=moderator")
 	require.NoError(t, err)
 	require.Equal(t, resp.StatusCode, http.StatusOK)
+	defer resp.Body.Close()
 
 	token, err := getTokenFromBody(resp.Body)
 	require.NoError(t, err)
@@ -43,7 +42,7 @@ func (s *FlatCreateSuite) TestService_FlatCreate(t provider.T) {
 	bodyBytes, err := json.Marshal(&body)
 	require.NoError(t, err)
 
-	req, err := http.NewRequest("POST", "http://localhost:8080/flat/create", bytes.NewReader(bodyBytes))
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:8080/flat/create", bytes.NewReader(bodyBytes))
 	require.NoError(t, err)
 	req.Header.Set("Authorization", token)
 
@@ -51,6 +50,7 @@ func (s *FlatCreateSuite) TestService_FlatCreate(t provider.T) {
 	resp, err = client.Do(req)
 	require.NoError(t, err)
 	require.Equal(t, resp.StatusCode, http.StatusOK)
+	defer resp.Body.Close()
 
 }
 
