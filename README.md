@@ -4,7 +4,7 @@
 [![Audit](https://github.com/Ropho/avito-bootcamp-assignment/actions/workflows/audit.yml/badge.svg?branch=master)](https://github.com/Ropho/avito-bootcamp-assignment/actions/workflows/audit.yml)
 
 ## Задание 
-Задание состояло в создании сервиса домов, с помощью которого пользователь сможет продать квартиру, загрузив объявление на Авито. 
+Задание состояло в создании сервиса домов, с помощью которого пользователь сможет продать квартиру, загрузив объявление на Авито.
 
 ## Реализация
 
