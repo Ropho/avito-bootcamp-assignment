@@ -18,6 +18,10 @@ func TestServiceStart(t *testing.T) {
 	suite.RunSuite(t, new(ServiceStartSuite))
 }
 
-func TestFlactCreate(t *testing.T) {
+func TestFlatCreate(t *testing.T) {
 	suite.RunSuite(t, new(FlatCreateSuite))
+}
+
+func TestGetHouseFlats(t *testing.T) {
+	suite.RunSuite(t, new(GetHouseFlats))
 }
